@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block content %}
+    <h1>chapter </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>grade</th>
+                <th>subject</th>
+                <th>chapter_no</th>
+                <th>chapter_name</th>
+                <th>Description</th>
+            </tr>
+        </thead>{% for d in data %}<tr>
+            <td align="center">{{d.grade}}
+            <td align="center">{{d.subject}}
+            <td align="center">{{d.chapter_no}}
+            <td align="center">{{d.name}}
+            <td align="center">{{d.description}}
+        </tr>
+        <div style="break-after:page"></div>{% endfor %}
+    </table>
+
+{% endblock %}
