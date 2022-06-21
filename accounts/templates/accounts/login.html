@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+    {% block content %}
+<form>
+<form action="{% url 'simplelogin' %}" method="POST">
+    {% csrf_token %}
+    {{form.email}}
+
+    {{form.phone}}
+    <input type='submit'>
+</form>
+{% endblock %}
+
+

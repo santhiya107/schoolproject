@@ -29,6 +29,12 @@ from .auth_backend import PasswordlessAuthBackend
 from random import randint
 from http import client
 from django.contrib.auth import get_user_model
+from . forms import *
+from django.shortcuts import render,redirect
+from .models import *
+
+
+
 # Create your views here.
 
 
@@ -195,3 +201,27 @@ class ProfileView(APIView):
         user = self.request.user 
         serializer = UserDetailsSerializer(user)
         return Response({"status" : "success","data" :serializer.data})
+
+
+def signupview(request):    
+    form=signup()
+    if request.method=='POST':
+        form=signup(request.POST)
+        if form.is_valid():
+            email=form.cleaned_data['email']
+            phone=form.cleaned_data['phone']
+            date_of_birth=form.cleaned_data['date_of_birth']
+            register_number=form.cleaned_data['register_number']
+            usertype=form.cleaned_data['user_type']
+            firstname=form.cleaned_data['first_name']
+            lastname=form.cleaned_data['last_name']
+            fullname=form.cleaned_data['full_name']
+            standard=form.cleaned_data['standard']
+            address=form.cleaned_data['address']
+            section=form.cleaned_data['section']
+            dataentry=form.cleaned_data['data_entry_user']
+            user=User.objects.create(email=email,phone=phone,date_of_birth=date_of_birth,user_type=usertype,register_number=register_number,is_data_entry=dataentry)
+            Profile.objects.create(user=user,first_name=firstname,last_name=lastname,full_name=fullname,standard=standard,address=address,section=section)
+            return redirect('websignup')
+    context={'form':form}
+    return render(request,'signup.html',context)

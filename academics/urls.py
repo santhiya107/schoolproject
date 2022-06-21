@@ -1,4 +1,5 @@
 from django.urls import path
+from .views import *
 from .views import ( 
     GradeView, 
     SubjectCreateView,
@@ -23,4 +24,8 @@ urlpatterns=[
     path('question/',QuestionCreateView.as_view()),
     path('question/<int:pk>/',QuestionEditView.as_view()),
     path('questionlist/',QuestionList.as_view()),
+    
+    
+
+    
 ]

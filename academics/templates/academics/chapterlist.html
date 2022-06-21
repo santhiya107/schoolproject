@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div class="question">
+        <form action="{% url 'chapterlistview' %}" method="POST">
+             {% csrf_token %}
+
+        {% comment %} Subject:<input type="text" name="subject" palceholder="enter subject"><br>
+        Grade:<input type="text" name="grade" palceholder="enter grade" > {% endcomment %}
+{{form.as_p}}
+        <input type="submit" value='Get Chapters'>
+         </form>
+
+        </div>
+        <div>
+            {% for l in rec %}
+            {{ forloop.counter }} .
+            {{l.name}}
+            
+            {% endfor %}
+            {% endblock %}
+        </div>

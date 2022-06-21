@@ -1,0 +1,44 @@
+class SignupSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    phone = serializers.CharField(max_length=10)
+    register_number = serializers.CharField(max_length=15)
+    date_of_birth = serializers.DateField()
+    user_type = serializers.ChoiceField(
+        choices = usertype_choice,
+        default='0'
+    )
+    first_name = serializers.CharField(max_length=15)
+    last_name = serializers.CharField(max_length=15)
+    full_name =serializers.CharField(max_length=30)
+    profile_picture = serializers.ImageField() 
+    standard = serializers.IntegerField()
+    section = serializers.CharField(max_length=2)
+    address = serializers.CharField(max_length=45)
+    is_data_entry = serializers.BooleanField()
+
+    def create(self, validated_data):
+        email = validated_data.pop("email")
+        phone = validated_data.pop("phone")
+        register_number = validated_data.pop("register_number")
+        date_of_birth = validated_data.pop("date_of_birth")
+        user_type = validated_data.pop("user_type")
+        first_name = validated_data.pop("first_name")
+        last_name = validated_data.pop("last_name")        
+        full_name = validated_data.pop("full_name")
+        profile_picture = validated_data.pop("profile_picture")
+        standard = validated_data.pop("standard")
+        section = validated_data.pop("section")
+        address = validated_data.pop("address")
+        is_data_entry = validated_data.pop("is_data_entry")
+        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,
+        register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
+        user.save()
+        Profile.objects.create(user=user,first_name=first_name,last_name=last_name,
+        standard=standard,section=section,address=address, full_name=full_name,
+        profile_picture=profile_picture)
+        subject = 'Welcome to our school'
+        message = f'Hi {full_name}, thank you for joining in our school'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [user.email,]
+        send_mail(subject,message,email_from,recipient_list)
+        return user

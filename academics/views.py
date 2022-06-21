@@ -28,6 +28,10 @@ from .serializers import (
 from .models import Question, Subject,Grade,Chapter
 from accounts.models import User
 from .utils import render_to_pdf
+from . forms import *
+from django.shortcuts import render,redirect
+from .models import *
+
 
 # Create your views here.
 
@@ -35,7 +39,7 @@ from .utils import render_to_pdf
 class GradeView(ListCreateAPIView):
     serializer_class = GradeSerializer
     queryset = Grade.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def list(self,request):
         queryset = self.get_queryset()
@@ -53,7 +57,7 @@ class GradeView(ListCreateAPIView):
 class SubjectCreateView(ListCreateAPIView):
     serializer_class = SubjectSerializer
     queryset = Subject.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def list(self,request):
         queryset = self.get_queryset()
@@ -102,7 +106,7 @@ class SubjectEditView(RetrieveUpdateDestroyAPIView):
 
 
 class ChaptersCreateView(CreateAPIView):
-
+    
     serializer_class=ChapterSerializer
     queryset= Chapter.objects.all()
     permission_classes=[IsAuthenticated]
@@ -145,7 +149,7 @@ class ChapterEditView(RetrieveUpdateDestroyAPIView):
 
 class ChapterListView(APIView):
     serializer_class=ChapterViewSerializer
-
+    permission_classes=[AllowAny]
     def post(self,request):
         grade = request.data.get('grade')
         subject=(request.data.get('subject')).capitalize()
@@ -244,3 +248,7 @@ class QuestionList(APIView):
             return Response({'path':f'{host}/media/question_files/{filename}.pdf'})
         except:
             return Response({"status": "given details are incorrect"}, status=HTTP_400_BAD_REQUEST)
+
+"   "
+
+

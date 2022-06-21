@@ -10,6 +10,7 @@ def render_to_pdf(template_src,folder_name,params:dict):
     folder_name = folder_name
     print(folder_name)
     html = template.render(params)
+    print(params)
     result = BytesIO()
     filename= uuid.uuid4()
     pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)

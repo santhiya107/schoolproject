@@ -21,7 +21,7 @@ class Subject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.grade.grade) + ' ' +self.name
+        return str(self.grade) + ' ' +self.name
 
     def save(self, *args, **kwargs):
         name = re.findall(r"[^\W\d_]+|\d+",self.name)

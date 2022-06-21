@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+    {% block content %}
+       <div class="grade">
+        <form action="{% url 'gradeview' %}" method="POST">
+             {% csrf_token %}
+        {{form.as_p}} 
+        {% comment %} grade:<input type='text' name=grade> {% endcomment %}
+        
+        <input type='submit'>
+        </div>
+        <div>
+
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>                   
+                    <th scope="col">Grade</th>                
+                  </tr>
+                </thead>
+                {% for l in grade %}
+              
+      
+                <tbody>                   
+                  <tr>                   
+                    <td>{{l.grade}}</td>                                  
+                  </tr>
+              
+                  {% endfor %}
+              
+          </tbody>
+      </table>
+              
+                
+
+
+            
+        </div>
+
+    {% endblock %}

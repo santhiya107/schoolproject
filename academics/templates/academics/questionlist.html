@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div class="question">
+        <form action="{% url 'questionlistview' %}" method="POST">
+             {% csrf_token %}
+
+        Subject:<input type="text" name="subject" palceholder="enter subject">
+        Grade:<input type="text" name="grade" palceholder="enter grade" >
+
+        <input type="submit" value='Get Question'>
+         </form>
+
+        </div>
+        <div>
+            {% for l in question %}
+            {{ forloop.counter }} .
+            {{l.question}}<br>
+            {% endfor %}
+            {% endblock %}
+        </div>

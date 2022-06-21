@@ -1,7 +1,7 @@
 {% extends "base.html" %}
     {% block content %}
         <div class="box">
-        <form action="{% url 'chaptercreateview' %}" method="POST">
+        <form action="{% url 'subcreateview' %}" method="POST">
              {% csrf_token %}
         {{form.as_p}}
         <input type='submit'>

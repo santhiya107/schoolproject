@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from re import template
-from dotenv import load_dotenv, find_dotenv
+
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-wv3=h63m#ic9sq_w*gq^q-zr8cy1v++4iux5z+!#rc2o!!xdtt'
-load_dotenv(find_dotenv())
 
-SECRET_KEY = os.environ['SECRET_KEY']
+
+SECRET_KEY = 'django-insecure-wv3=h63m#ic9sq_w*gq^q-zr8cy1v++4iux5z+!#rc2o!!xdtt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -192,9 +192,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
-EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
-EMAIL_PORT = os.environ['EMAIL_PORT']
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+# EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+# EMAIL_HOST = os.environ['EMAIL_HOST']
+# EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
+# EMAIL_PORT = os.environ['EMAIL_PORT']
+# EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+# EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']

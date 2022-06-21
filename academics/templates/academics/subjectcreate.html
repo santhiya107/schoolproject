@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div class="question">
+         <form action="{% url 'subcreateview' %}" method="POST">
+             {% csrf_token %}
+
+    
+        {{form.as_p}}
+
+        <input type="submit" value='create'>
+         </form> 
+
+        </div>
+        <div>
+            
+            
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Grade</th>
+                    
+                      </tr>
+                    </thead>
+                    {% for l in subject %}
+                    {% if l is not None %}
+          
+                    <tbody>
+                       
+                      <tr>
+                       
+                        <td>{{l.name}}</td>
+                        <td>{{l.code}}</td>
+                        <td>{{l.grade}}</td>
+                      </tr>
+                     
+                    
+            
+     
+
+         {% comment %} <a href="{% url 'subjectedit' l.id %}">Edit</a><br>
+         <a href="{% url 'subjectdelete' l.id %}">Delete</a><br> {% endcomment %}
+         {% endif %}
+            {% endfor %}
+        
+    </tbody>
+</table>
+        
+            {% endblock %}
+        </div>
